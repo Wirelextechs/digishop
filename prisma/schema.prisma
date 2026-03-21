@@ -1,0 +1,90 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+}
+
+// User model
+model User {
+  id               String    @id @default(uuid())
+  role             Role
+  name             String
+  email            String    @unique
+  momo_number      String?
+  total_earned     Decimal   @default(0)
+  pending_balance  Decimal   @default(0)
+  available_balance Decimal  @default(0)
+  products         Product[]
+  orders_bought    Order[]   @relation("BuyerOrders")
+  orders_referred  Order[]   @relation("AffiliateOrders")
+  created_at       DateTime  @default(now())
+  updated_at       DateTime  @updatedAt
+}
+
+enum Role {
+  SUPER_ADMIN
+  VENDOR
+  AFFILIATE
+  CUSTOMER
+}
+
+model Product {
+  id               String    @id @default(uuid())
+  vendor_id        String
+  vendor           User      @relation(fields: [vendor_id], references: [id])
+  type             ProductType
+  title            String
+  description      String?
+  base_price       Decimal
+  commission_rate  Decimal
+  stock            Int       @default(0)
+  variants         ProductVariant[]
+  orders           Order[]
+  created_at       DateTime  @default(now())
+  updated_at       DateTime  @updatedAt
+}
+
+enum ProductType {
+  DIGITAL
+  PHYSICAL
+}
+
+model ProductVariant {
+  id               String    @id @default(uuid())
+  product_id       String
+  product          Product   @relation(fields: [product_id], references: [id])
+  variant_name     String
+  value            String
+  price_adjustment Decimal   @default(0)
+}
+
+model Order {
+  id               String    @id @default(uuid())
+  buyer_id         String
+  buyer            User      @relation("BuyerOrders", fields: [buyer_id], references: [id])
+  product_id       String
+  product          Product   @relation(fields: [product_id], references: [id])
+  affiliate_id     String?
+  affiliate        User?     @relation("AffiliateOrders", fields: [affiliate_id], references: [id])
+  gateway_name     String
+  transaction_ref  String    @unique
+  status           OrderStatus @default(PENDING)
+  created_at       DateTime  @default(now())
+  updated_at       DateTime  @updatedAt
+}
+
+enum OrderStatus {
+  PENDING
+  IN_DELIVERY
+  COMPLETED
+  FAILED
+}
+
+model Gateway {
+  id               String    @id @default(uuid())
+  name             String    @unique // 'Paystack', 'Moolre'
+  api_keys         Json?
+  is_active        Boolean   @default(false)
+}
