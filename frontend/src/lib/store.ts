@@ -42,7 +42,7 @@ export const useAppStore = create<AppState>()(
       setUser: (user) => set({ user }),
     }),
     {
-      name: 'digishop-storage', // name of the item in the storage (must be unique)
+      name: 'wireshop-storage', // name of the item in the storage (must be unique)
     }
   )
 );

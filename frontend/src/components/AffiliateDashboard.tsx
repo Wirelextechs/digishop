@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { useAppStore } from '@/lib/store';
 
 export function AffiliateDashboard() {
-  const user = useAppStore(state => state.user);
+  const user = useAppStore((state: any) => state.user);
   const [modalOpen, setModalOpen] = useState(false);
 
   // Mock earnings data for UI demonstration
@@ -43,7 +43,7 @@ export function AffiliateDashboard() {
           className="btn-primary" 
           style={{ flex: 1, background: '#25D366' }}
           onClick={() => {
-             const text = encodeURIComponent("Check out this awesome product on DigiShop! 🔥 https://digishop.com/?ref=demo");
+             const text = encodeURIComponent("Check out this awesome product on wireshop! 🔥 https://wireshop.com/?ref=demo");
              window.open(`whatsapp://send?text=${text}`, '_blank');
           }}
         >
