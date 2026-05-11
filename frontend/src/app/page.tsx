@@ -1,145 +1,175 @@
-import React from 'react';
-import Link from 'next/link';
+"use client";
+
+import { motion } from "framer-motion";
+import { ArrowRight, Zap, ShieldCheck, Truck, Star } from "lucide-react";
+import Link from "next/link";
 
 const categories = [
-  { name: 'Electronics', icon: '💻', slug: 'electronics' },
-  { name: 'Fashion', icon: '👗', slug: 'fashion' },
-  { name: 'Home & Living', icon: '🏠', slug: 'home-living' },
-  { name: 'Health & Beauty', icon: '💄', slug: 'health-beauty' },
-  { name: 'Food & Groceries', icon: '🛒', slug: 'food-groceries' },
-  { name: 'Sports', icon: '⚽', slug: 'sports-outdoors' },
-  { name: 'Baby & Kids', icon: '🧸', slug: 'baby-kids' },
-  { name: 'Phones', icon: '📱', slug: 'phones-tablets' },
+  { name: "Electronics", icon: "💻", color: "bg-blue-50" },
+  { name: "Fashion", icon: "👗", color: "bg-pink-50" },
+  { name: "Home", icon: "🏠", color: "bg-orange-50" },
+  { name: "Beauty", icon: "💄", color: "bg-purple-50" },
+  { name: "Groceries", icon: "🍎", color: "bg-green-50" },
+  { name: "Sports", icon: "⚽", color: "bg-red-50" },
+  { name: "Kids", icon: "🧸", color: "bg-yellow-50" },
+  { name: "Phones", icon: "📱", color: "bg-indigo-50" },
 ];
 
 export default function Home() {
   return (
-    <div className="space-y-24 pb-24">
-      {/* Hero Section */}
-      <section className="relative overflow-hidden pt-12 md:pt-24">
-        <div className="container relative z-10">
-          <div className="max-w-2xl">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-orange-100 dark:bg-orange-500/10 text-orange-600 dark:text-orange-400 text-xs font-bold uppercase tracking-wider mb-6">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-orange-500"></span>
-              </span>
-              New Arrivals Just Landed
-            </div>
-            <h1 className="text-5xl md:text-7xl font-black text-slate-900 dark:text-white leading-[1.1] tracking-tight mb-8">
-              Premium Shopping <br />
-              <span className="text-orange-500 italic">Redefined.</span>
-            </h1>
-            <p className="text-lg text-slate-500 dark:text-slate-400 mb-10 leading-relaxed max-w-lg">
-              Experience Ghana's most curated marketplace. Quality products, secure payments, and lightning-fast delivery.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Link href="/products" className="btn-primary px-10 py-4 text-center">
-                Explore Marketplace
-              </Link>
-              <Link href="/sell" className="px-10 py-4 text-center font-bold text-slate-900 dark:text-white border border-slate-200 dark:border-slate-800 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors">
-                Become a Seller
-              </Link>
-            </div>
-          </div>
-        </div>
-
-        {/* Background Decorative Elements */}
-        <div className="absolute top-0 right-0 -translate-y-1/4 translate-x-1/4 w-[600px] h-[600px] bg-orange-500/5 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-0 translate-y-1/4 -translate-x-1/4 w-[400px] h-[400px] bg-blue-500/5 rounded-full blur-3xl pointer-events-none" />
-      </section>
-
-      {/* Categories Grid */}
-      <section className="container">
-        <div className="flex items-end justify-between mb-12">
-          <div>
-            <h2 className="text-3xl font-black tracking-tight mb-2">Shop by Category</h2>
-            <p className="text-slate-500 text-sm">Find exactly what you're looking for</p>
-          </div>
-          <Link href="/products" className="text-sm font-bold text-orange-500 hover:gap-2 flex items-center gap-1 transition-all">
-            Browse All <span>→</span>
-          </Link>
-        </div>
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-4">
-          {categories.map((cat) => (
-            <Link key={cat.slug} href={`/products?category=${cat.slug}`} className="group">
-              <div className="h-full p-6 bg-slate-50 dark:bg-slate-900/50 rounded-3xl border border-transparent hover:border-orange-200 dark:hover:border-orange-500/20 hover:bg-white dark:hover:bg-slate-800 transition-all duration-300 text-center">
-                <div className="text-3xl mb-4 group-hover:scale-110 transition-transform duration-300">{cat.icon}</div>
-                <div className="text-xs font-bold uppercase tracking-wide text-slate-700 dark:text-slate-300">{cat.name}</div>
+    <>
+        {/* Hero Section - App Style */}
+        <section className="relative overflow-hidden pt-8 pb-16 md:pt-16 md:pb-24 px-4">
+          <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-12 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              className="z-10"
+            >
+              <div className="inline-flex items-center gap-2 bg-brand/10 text-brand px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider mb-6">
+                <Star size={14} fill="currentColor" /> Premium Shopping Experience
               </div>
-            </Link>
-          ))}
-        </div>
-      </section>
-
-      {/* Featured Promo */}
-      <section className="container">
-        <div className="bg-slate-900 dark:bg-orange-600 rounded-[2.5rem] p-8 md:p-16 flex flex-col md:row items-center justify-between gap-12 text-white relative overflow-hidden">
-          <div className="relative z-10 text-center md:text-left">
-            <h2 className="text-3xl md:text-5xl font-black mb-6 leading-tight">
-              Get Free Delivery <br />
-              on your first order.
-            </h2>
-            <p className="text-slate-400 dark:text-orange-100 mb-10 max-w-sm">
-              Use code <span className="text-white font-mono font-bold bg-white/10 px-2 py-1 rounded">WELCOME2026</span> at checkout.
-            </p>
-            <Link href="/products" className="inline-block bg-white text-slate-900 dark:text-orange-600 px-8 py-4 rounded-2xl font-black hover:scale-105 transition-transform">
-              Claim Now
-            </Link>
-          </div>
-          <div className="hidden md:block w-1/3 aspect-square bg-white/5 rounded-full border border-white/10 absolute -right-20 -bottom-20" />
-          <div className="hidden md:block w-1/4 aspect-square bg-white/5 rounded-full border border-white/10 absolute -right-10 -top-10" />
-        </div>
-      </section>
-
-      {/* Why wireshop */}
-      <section className="container bg-slate-50 dark:bg-slate-900/50 rounded-[3rem] py-20 px-8 md:px-16">
-        <div className="max-w-3xl mx-auto text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-black tracking-tight mb-6">The wireshop Experience</h2>
-          <p className="text-slate-500 leading-relaxed">
-            We've simplified online shopping for thousands of Ghanaians. Discover why we're the fastest-growing marketplace in the region.
-          </p>
-        </div>
-        <div className="grid md:grid-cols-3 gap-12">
-          {[
-            { title: 'Secure Checkout', desc: 'MTN MoMo, Vodafone Cash, and Cards all protected with bank-grade security.', icon: '🛡️' },
-            { title: 'Fast Regional Delivery', desc: 'From Accra to Tamale, we ensure your products reach you within 24-48 hours.', icon: '⚡' },
-            { title: 'Buyer Protection', desc: "Not what you ordered? Our 7-day hassle-free return policy has you covered.", icon: '🤝' },
-          ].map((item, idx) => (
-            <div key={idx} className="text-center md:text-left space-y-4">
-              <div className="w-12 h-12 bg-white dark:bg-slate-800 rounded-2xl flex items-center justify-center text-2xl shadow-sm mx-auto md:mx-0">
-                {item.icon}
+              <h1 className="text-5xl md:text-7xl font-black text-on-surface leading-[0.9] mb-6">
+                SHOP THE <span className="text-brand">FUTURE</span> <br />
+                OF MARKETPLACE.
+              </h1>
+              <p className="text-lg text-on-surface-variant mb-10 max-w-lg leading-relaxed">
+                Ghana's most curated digital marketplace. Experience lightning-fast delivery and secure payments on every order.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Link href="/products" className="btn-primary group">
+                  Explore Marketplace
+                  <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                </Link>
+                <button className="btn-secondary">
+                  Become a Seller
+                </button>
               </div>
-              <h4 className="text-lg font-black">{item.title}</h4>
-              <p className="text-sm text-slate-500 leading-relaxed">{item.desc}</p>
-            </div>
-          ))}
-        </div>
-      </section>
+            </motion.div>
 
-      {/* New Arrivals Placeholder */}
-      <section className="container">
-        <div className="flex items-end justify-between mb-12">
-          <div>
-            <h2 className="text-3xl font-black tracking-tight mb-2">New Arrivals</h2>
-            <p className="text-slate-500 text-sm">Freshly added to the store</p>
+            <motion.div
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.8 }}
+              className="relative aspect-square lg:aspect-auto h-[400px] md:h-[600px] rounded-[3rem] overflow-hidden shadow-premium bg-surface-variant"
+            >
+               {/* Animated geometric background elements */}
+               <div className="absolute top-10 right-10 w-64 h-64 bg-brand/20 rounded-full blur-3xl animate-pulse" />
+               <div className="absolute -bottom-20 -left-20 w-80 h-80 bg-blue-400/20 rounded-full blur-3xl animate-pulse delay-700" />
+
+               <div className="absolute inset-0 flex items-center justify-center p-12">
+                  <div className="text-center">
+                     <p className="text-brand font-black text-[12rem] opacity-10 italic">W</p>
+                     <div className="absolute inset-0 flex items-center justify-center">
+                        <div className="bg-white/40 backdrop-blur-xl p-8 rounded-3xl border border-white/50 shadow-premium">
+                           <p className="text-2xl font-bold text-on-surface">Flash Sale Live</p>
+                           <p className="text-brand text-4xl font-black">UP TO 70% OFF</p>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </motion.div>
           </div>
-        </div>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-          {[1, 2, 3, 4].map((i) => (
-            <div key={i} className="group cursor-pointer">
-              <div className="aspect-[4/5] bg-slate-100 dark:bg-slate-800 rounded-[2rem] mb-4 overflow-hidden relative">
-                <div className="absolute inset-0 bg-slate-200 dark:bg-slate-700 animate-pulse" />
-                <div className="absolute top-4 left-4 bg-white/80 backdrop-blur-md px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider">
-                  Coming Soon
+        </section>
+
+        {/* Category Grid - Modern Pills */}
+        <section className="py-12 px-4 bg-surface-variant/30">
+          <div className="max-w-7xl mx-auto">
+            <div className="flex items-center justify-between mb-8">
+              <h2 className="text-2xl font-black tracking-tight">Shop by Category</h2>
+              <Link href="/products" className="text-brand font-bold text-sm flex items-center gap-1 hover:underline">
+                Browse All <ArrowRight size={14} />
+              </Link>
+            </div>
+
+            <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-4">
+              {categories.map((cat, idx) => (
+                <motion.div
+                  key={cat.name}
+                  whileHover={{ y: -5 }}
+                  className={`p-6 rounded-[2rem] ${cat.color} border border-transparent hover:border-brand/20 transition-all cursor-pointer flex flex-col items-center gap-3 text-center group`}
+                >
+                  <span className="text-4xl group-hover:scale-110 transition-transform">{cat.icon}</span>
+                  <span className="text-xs font-bold uppercase tracking-tight text-on-surface">{cat.name}</span>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Why wireshop - Premium Trust Section */}
+        <section className="py-24 px-4 overflow-hidden">
+          <div className="max-w-7xl mx-auto">
+            <div className="bg-on-surface rounded-[4rem] p-12 md:p-20 relative overflow-hidden text-white shadow-premium">
+              <div className="absolute top-0 right-0 w-1/2 h-full bg-brand/10 skew-x-12 translate-x-20" />
+
+              <div className="relative z-10 grid md:grid-cols-3 gap-12">
+                <div className="space-y-4">
+                  <div className="w-12 h-12 bg-brand rounded-2xl flex items-center justify-center mb-6">
+                    <ShieldCheck size={24} />
+                  </div>
+                  <h3 className="text-xl font-bold">Secure Checkout</h3>
+                  <p className="text-white/60 leading-relaxed text-sm">
+                    MTN MoMo, Vodafone Cash, and Cards all protected with bank-grade encryption.
+                  </p>
+                </div>
+
+                <div className="space-y-4">
+                  <div className="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center mb-6">
+                    <Truck size={24} />
+                  </div>
+                  <h3 className="text-xl font-bold">Fast Delivery</h3>
+                  <p className="text-white/60 leading-relaxed text-sm">
+                    From Accra to Tamale, we ensure your products reach you within 24-48 hours.
+                  </p>
+                </div>
+
+                <div className="space-y-4">
+                  <div className="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center mb-6">
+                    <Star size={24} />
+                  </div>
+                  <h3 className="text-xl font-bold">Buyer Protection</h3>
+                  <p className="text-white/60 leading-relaxed text-sm">
+                    Not what you ordered? Our 7-day hassle-free return policy has you covered.
+                  </p>
                 </div>
               </div>
-              <div className="h-4 w-2/3 bg-slate-100 dark:bg-slate-800 rounded-full mb-2" />
-              <div className="h-4 w-1/3 bg-slate-100 dark:bg-slate-800 rounded-full" />
             </div>
-          ))}
-        </div>
-      </section>
-    </div>
+          </div>
+        </section>
+
+        {/* New Arrivals - Feed style */}
+        <section className="py-12 px-4 pb-32">
+          <div className="max-w-7xl mx-auto">
+            <div className="flex items-center gap-3 mb-10">
+               <div className="w-2 h-8 bg-brand rounded-full" />
+               <h2 className="text-3xl font-black tracking-tight uppercase">New Arrivals</h2>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+              {[1, 2, 3, 4].map((i) => (
+                <div key={i} className="group cursor-pointer">
+                  <div className="aspect-[4/5] bg-surface-variant rounded-[2.5rem] relative overflow-hidden mb-4 shadow-sm group-hover:shadow-lg transition-all duration-500">
+                    <div className="absolute top-6 left-6">
+                       <span className="bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest text-on-surface border border-outline">
+                          NEW
+                       </span>
+                    </div>
+                    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-transparent to-brand/5">
+                      <Zap size={48} className="text-on-surface-variant/20" />
+                    </div>
+                  </div>
+                  <h4 className="text-lg font-bold text-on-surface mb-1 group-hover:text-brand transition-colors">Future Product {i}</h4>
+                  <div className="flex items-center gap-3">
+                     <span className="text-xl font-black">GHS 299.00</span>
+                     <span className="text-on-surface-variant line-through text-sm">GHS 450.00</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+    </>
   );
 }
