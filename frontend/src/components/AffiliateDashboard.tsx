@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { useAppStore } from '@/lib/store';
 
 export function AffiliateDashboard() {
-  const user = useAppStore((state: any) => state.user);
+  const user = useAppStore((state) => state.user);
   const [modalOpen, setModalOpen] = useState(false);
 
   // Mock earnings data for UI demonstration
