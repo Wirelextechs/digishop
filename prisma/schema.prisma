@@ -35,9 +35,13 @@ model Product {
   vendor_id        String
   vendor           User      @relation(fields: [vendor_id], references: [id])
   type             ProductType
+  category         String?
+  status           String?   // "AVAILABLE", "PRE_ORDER"
   title            String
   description      String?
+  image_url        String?
   base_price       Decimal
+  discount_price   Decimal?
   commission_rate  Decimal
   stock            Int       @default(0)
   variants         ProductVariant[]
